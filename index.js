@@ -94,7 +94,7 @@ const generateHTML = (answer) => {
             }
 
             .user-profile {
-                margin-bottom: -6rem;
+                margin-bottom: -7rem;
                 border-radius: 10px;
                 padding-bottom: 1rem;
             }
@@ -170,7 +170,7 @@ const generateHTML = (answer) => {
                         <div class="card mb-3">
                             <div class="card-header">GitHub stars:</div>
                             <div class="card-body">
-                                <h5 class="card-title">10</h5>
+                                <h5 class="card-title"></h5>
                             </div>
                         </div>
 
