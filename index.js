@@ -5,6 +5,21 @@ const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
+const colors = [
+    {
+        red: "#ff0000"
+    },
+    {
+        green:  "#009900"
+    },
+    {
+        blue: "#3333cc"
+    },
+    {
+        pink: "#ff66cc"
+    }
+]
+
 
 const promptUser = () => {
 
@@ -55,7 +70,57 @@ const generateHTML = (answer) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Github Developer Profile</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="styles.css">
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                padding-bottom: 1rem;
+            }
+
+            .jumbotron {
+                padding-top: 7rem;
+            }
+
+            .profile-img {
+                width: 250px;
+                height: 250px;
+                object-fit: cover;
+                box-shadow: 4px 8px 8px 0 rgba(0,0,0,0.2);
+                margin-top: -4rem;
+            }
+
+            .user-profile {
+                margin-bottom: -6rem;
+                border-radius: 10px;
+                padding-bottom: 1rem;
+            }
+
+            .user-info {
+                margin-top: 5rem;
+            }
+
+            .user-info h4 {
+                margin-bottom: 3rem;
+            }
+
+            .card {
+                box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
+            }
+
+            @media screen and (min-width: 690px) {
+                .user-cards {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-gap: 1em;
+                }
+
+            }
+        </style>
+
     </head>
     <body>
 
