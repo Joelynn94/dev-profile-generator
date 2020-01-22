@@ -5,21 +5,6 @@ const util = require("util");
 
 const writeFileAsync = util.promisify(fs.writeFile);
 
-const colors = [
-    {
-        red: "#ff0000"
-    },
-    {
-        green:  "#009900"
-    },
-    {
-        blue: "#3333cc"
-    },
-    {
-        pink: "#ff66cc"
-    }
-]
-
 
 const promptUser = () => {
 
@@ -42,9 +27,9 @@ const promptUser = () => {
 
             axios
                 .get(mainURL)
-                .then(function(answer) {
+                .then(function(answer) {  
 
-                    const html = generateHTML(answer);
+                    const html = generateHTML(answer, color);
                 
                     return writeFileAsync("index.html", html);
                     })
@@ -60,7 +45,31 @@ const promptUser = () => {
 
 promptUser();
 
-const generateHTML = (answer) => {
+const colors = {
+    red: {
+        wrapperBackground: "#DE9967",
+        headerBackground: "#9d0000",
+        headerColor: "white",
+    },
+    green: {
+        wrapperBackground: "##C1C72C",
+        headerBackground: "009900",
+        headerColor: "black"
+    },
+    blue: {
+        wrapperBackground: "#26175A",
+        headerBackground: "#3333cc",
+        headerColor: "white"
+    },
+    pink: {
+        wrapperBackground: "#FF8374",
+        headerBackground: "#ff66cc",
+        headerColor: "white"
+    },
+
+  };
+
+const generateHTML = (answer, userColorChoice) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -81,6 +90,10 @@ const generateHTML = (answer) => {
                 padding-bottom: 1rem;
             }
 
+            a {
+                color: ${colors[userColorChoice].headerColor}
+            }
+
             .jumbotron {
                 padding-top: 7rem;
             }
@@ -93,7 +106,13 @@ const generateHTML = (answer) => {
                 margin-top: -4rem;
             }
 
+            .user-color {
+                background-color: ${colors[userColorChoice].wrapperBackground};
+            }
+
             .user-profile {
+                background-color: ${colors[userColorChoice].headerBackground};
+                color: ${colors[userColorChoice].headerColor};
                 margin-bottom: -7rem;
                 border-radius: 10px;
                 padding-bottom: 1rem;
