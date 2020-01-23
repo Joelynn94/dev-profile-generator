@@ -238,16 +238,3 @@ const generateHTML = (answer, userColorChoice) => {
     </body>
     </html>`;
 }
-
-
-
-
-
-
-    /* 
-    colors
-        red - #ff0000
-        blue - #3333cc
-        green - #009900
-        pink - #ff66cc
-    */
