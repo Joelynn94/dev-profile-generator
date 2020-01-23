@@ -1,10 +1,14 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
+const pdf = require('html-pdf');
+
+/*
+USE IF WE WANT TO WRITE HTML
+
 const fs = require("fs");
 const util = require("util");
-
 const writeFileAsync = util.promisify(fs.writeFile);
-
+*/
 
 const promptUser = () => {
 
@@ -29,9 +33,17 @@ const promptUser = () => {
                 .get(mainURL)
                 .then(function(answer) {  
 
+                    /*
+                    USE THIS IF WE WANT TO STAY IN THE BROWSER USING HTML
                     const html = generateHTML(answer, color);
                 
                     return writeFileAsync("index.html", html);
+                    */
+                    pdf.create(generateHTML(answer, color)).toFile('./profile.pdf', function(err, res) {
+                        if (err) return console.log(err);
+                         console.log(res); 
+                    })
+
                     })
                     .then(function() {
                     console.log("Successfully wrote to index.html");
@@ -128,7 +140,7 @@ const generateHTML = (answer, userColorChoice) => {
             }
 
             .user-info {
-                margin-top: 5rem;
+                margin-top: 8rem;
             }
 
             .user-info h4 {
@@ -147,6 +159,14 @@ const generateHTML = (answer, userColorChoice) => {
                 }
 
             }
+
+            @media print {
+
+                body {
+                    zoom: .75;
+                }
+              
+              }
         </style>
 
     </head>
