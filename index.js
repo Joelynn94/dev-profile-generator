@@ -47,27 +47,27 @@ promptUser();
 
 const colors = {
     red: {
-        wrapperBackground: "#DE9967",
-        headerBackground: "#9d0000",
-        headerColor: "white",
+        containerBackground: "#400000",
+        profileBackground: "#800000",
+        profileColor: "white",
     },
     green: {
-        wrapperBackground: "##C1C72C",
-        headerBackground: "009900",
-        headerColor: "black"
+        containerBackground: "#004000",
+        profileBackground: "#008000",
+        profileColor: "white"
     },
     blue: {
-        wrapperBackground: "#26175A",
-        headerBackground: "#3333cc",
-        headerColor: "white"
+        containerBackground: "#101040",
+        profileBackground: "#3333cc",
+        profileColor: "white"
     },
     pink: {
-        wrapperBackground: "#FF8374",
-        headerBackground: "#ff66cc",
-        headerColor: "white"
+        containerBackground: "#401A33",
+        profileBackground: "#803366",
+        profileColor: "white"
     },
 
-  };
+};
 
 const generateHTML = (answer, userColorChoice) => {
     return `
@@ -91,7 +91,11 @@ const generateHTML = (answer, userColorChoice) => {
             }
 
             a {
-                color: ${colors[userColorChoice].headerColor}
+                color: ${colors[userColorChoice].profileColor};
+            }
+
+            a:hover {
+                color: ${colors[userColorChoice].containerBackground};
             }
 
             .jumbotron {
@@ -106,13 +110,18 @@ const generateHTML = (answer, userColorChoice) => {
                 margin-top: -4rem;
             }
 
+            .card-header {
+                background-color: ${colors[userColorChoice].profileBackground};
+                color: ${colors[userColorChoice].profileColor};
+            }
+
             .user-color {
-                background-color: ${colors[userColorChoice].wrapperBackground};
+                background-color: ${colors[userColorChoice].containerBackground};
             }
 
             .user-profile {
-                background-color: ${colors[userColorChoice].headerBackground};
-                color: ${colors[userColorChoice].headerColor};
+                background-color: ${colors[userColorChoice].profileBackground};
+                color: ${colors[userColorChoice].profileColor};
                 margin-bottom: -7rem;
                 border-radius: 10px;
                 padding-bottom: 1rem;
