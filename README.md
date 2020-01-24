@@ -22,8 +22,7 @@ The PDF will be populated with the following:
 * Number of GitHub stars
 * Number of users following
 
-Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this challenge as follows:
-
+# Demo
 ![git demo](/dev-profile-generator-demo.gif)
 
 Refer to the [design mockup](./Assets/09-NodeJS-homework-demo.pdf).
