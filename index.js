@@ -47,7 +47,7 @@ const promptUser = () => {
 
                 }))
                 .then(function() {
-                console.log("Successfully wrote to index.html");
+                console.log("Success! Wrote PDF file.");
                 })
                 .catch(function(err) {
                 console.log(err);
@@ -164,7 +164,7 @@ const generateHTML = (answer, starred, userColorChoice) => {
             @media print {
 
                 body {
-                    zoom: .75;
+                    zoom: .50;
                 }
               
               }
