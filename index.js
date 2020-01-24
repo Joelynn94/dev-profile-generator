@@ -27,31 +27,32 @@ const promptUser = () => {
             }
         ])
         .then(function({ username, color }) {
-            const mainURL = `https://api.github.com/users/${username}`;
 
-            axios
-                .get(mainURL)
-                .then(function(answer) {  
+            axios.all([
+            axios.get(`https://api.github.com/users/${username}`),
+            axios.get(`https://api.github.com/users/${username}/starred`)
+            ])
+            .then(axios.spread((answer, stars) => {  
 
-                    /*
-                    USE THIS IF WE WANT TO STAY IN THE BROWSER USING HTML
-                    const html = generateHTML(answer, color);
-                
-                    return writeFileAsync("index.html", html);
-                    */
-                    pdf.create(generateHTML(answer, color)).toFile('./profile.pdf', function(err, res) {
-                        if (err) return console.log(err);
-                         console.log(res); 
-                    })
+                /*
+                USE THIS IF WE WANT TO STAY IN THE BROWSER USING HTML
+                const html = generateHTML(answer, color);
+            
+                return writeFileAsync("index.html", html);
+                */
+                pdf.create(generateHTML(answer, stars, color)).toFile('./profile.pdf', function(err, res) {
+                    if (err) return console.log(err);
+                        console.log(res); 
+                })
 
-                    })
-                    .then(function() {
-                    console.log("Successfully wrote to index.html");
-                    })
-                    .catch(function(err) {
-                    console.log(err);
+                }))
+                .then(function() {
+                console.log("Successfully wrote to index.html");
+                })
+                .catch(function(err) {
+                console.log(err);
                     
-            });
+            })
         });
 }
 
@@ -81,7 +82,7 @@ const colors = {
 
 };
 
-const generateHTML = (answer, userColorChoice) => {
+const generateHTML = (answer, starred, userColorChoice) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -218,7 +219,7 @@ const generateHTML = (answer, userColorChoice) => {
                         <div class="card mb-3">
                             <div class="card-header">GitHub stars:</div>
                             <div class="card-body">
-                                <h5 class="card-title"></h5>
+                                <h5 class="card-title">${starred.data.length}</h5>
                             </div>
                         </div>
 
