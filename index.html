@@ -1,83 +1,4 @@
-const inquirer = require("inquirer");
-const axios = require("axios");
-const pdf = require('html-pdf');
 
-const fs = require("fs");
-const util = require("util");
-const writeFileAsync = util.promisify(fs.writeFile);
-
-
-const promptUser = () => {
-
-    inquirer
-        .prompt([
-            {
-                type: "input",
-                message: "Enter your GitHub username:",
-                name: "username"
-            },
-            {
-                type: "list",
-                message: "What's your favorite color?",
-                name: "color",
-                choices: ["red", "green", "blue", "pink"]
-            }
-        ])
-        .then(function({ username, color }) {
-
-            axios.all([
-            axios.get(`https://api.github.com/users/${username}`),
-            axios.get(`https://api.github.com/users/${username}/starred`)
-            ])
-            .then(axios.spread((answer, stars) => {  
-
-                fs.writeFileSync("index.html", generateHTML(answer, stars, color), function(err, result){
-                    if (err) console.log('error', err);
-                })
-                pdf.create(generateHTML(answer, stars, color)).toFile('./profile.pdf', function(err, res) {
-                    if (err) return console.log(err);
-                        console.log(res); 
-                })
-
-                }))
-                .then(function() {
-                console.log("Success! Wrote PDF file.");
-                })
-                .catch(function(err) {
-                console.log(err);
-                    
-            })
-        });
-}
-
-promptUser();
-
-const colors = {
-    red: {
-        containerBackground: "#400000",
-        profileBackground: "#800000",
-        profileColor: "white",
-    },
-    green: {
-        containerBackground: "#004000",
-        profileBackground: "#008000",
-        profileColor: "white"
-    },
-    blue: {
-        containerBackground: "#101040",
-        profileBackground: "#3333cc",
-        profileColor: "white"
-    },
-    pink: {
-        containerBackground: "#401A33",
-        profileBackground: "#803366",
-        profileColor: "white"
-    },
-
-};
-
-const generateHTML = (answer, starred, userColorChoice) => {
-    return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -98,11 +19,11 @@ const generateHTML = (answer, starred, userColorChoice) => {
             }
 
             a {
-                color: ${colors[userColorChoice].profileColor};
+                color: white;
             }
 
             a:hover {
-                color: ${colors[userColorChoice].containerBackground};
+                color: #400000;
             }
 
             .jumbotron {
@@ -118,17 +39,17 @@ const generateHTML = (answer, starred, userColorChoice) => {
             }
 
             .card-header {
-                background-color: ${colors[userColorChoice].profileBackground};
-                color: ${colors[userColorChoice].profileColor};
+                background-color: #800000;
+                color: white;
             }
 
             .user-color {
-                background-color: ${colors[userColorChoice].containerBackground};
+                background-color: #400000;
             }
 
             .user-profile {
-                background-color: ${colors[userColorChoice].profileBackground};
-                color: ${colors[userColorChoice].profileColor};
+                background-color: #800000;
+                color: white;
                 margin-bottom: -7rem;
                 border-radius: 10px;
                 padding-bottom: 1rem;
@@ -171,19 +92,19 @@ const generateHTML = (answer, starred, userColorChoice) => {
             <div class="jumbotron jumbotron-fluid text-center user-color">
                 <div class="container">
                     <div class="user-profile">
-                        <img src="${answer.data.avatar_url}" alt="Github profile picture" class="rounded-circle profile-img">
-                        <h1 class="display-4">Hi! My name is ${answer.data.name}</h1>
-                        <p class="lead">I am from ${answer.data.location}.</p>
+                        <img src="https://avatars0.githubusercontent.com/u/26981634?v=4" alt="Github profile picture" class="rounded-circle profile-img">
+                        <h1 class="display-4">Hi! My name is Joseph Lynn</h1>
+                        <p class="lead">I am from Cleveland, OH.</p>
                         <h3>Contact Me:</h3>
                         <ul class="nav justify-content-center">
                             <li class="nav-item">
-                                <a class="nav-link" href="${answer.data.html_url}">GitHub</a>
+                                <a class="nav-link" href="https://github.com/Joelynn94">GitHub</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">${answer.data.location}</a>
+                                <a class="nav-link" href="#">Cleveland, OH</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="${answer.data.blog}">Blog</a>
+                                <a class="nav-link" href="https://joelynn94.github.io/updated-portfolio/">Blog</a>
                             </li>
                         </ul>
                     </div>
@@ -193,34 +114,34 @@ const generateHTML = (answer, starred, userColorChoice) => {
 
             <div class="container">
                 <div class="user-info text-center">
-                    <h4>${answer.data.bio}</h4>
+                    <h4>I’m an aspiring web developer - going through Case Western's bootcamp in hopes of entering the world of tech. Looking for fun, creative and innovative work.</h4>
 
                     <div class="user-cards">
                         <div class="card mb-3">
                             <div class="card-header">Public Repositories:</div>
                             <div class="card-body">
-                                <h5 class="card-title">${answer.data.public_repos}</h5>
+                                <h5 class="card-title">19</h5>
                             </div>
                         </div>
 
                         <div class="card mb-3">
                             <div class="card-header">Followers:</div>
                             <div class="card-body">
-                                <h5 class="card-title">${answer.data.followers}</h5>
+                                <h5 class="card-title">2</h5>
                             </div>
                         </div>
 
                         <div class="card mb-3">
                             <div class="card-header">GitHub stars:</div>
                             <div class="card-body">
-                                <h5 class="card-title">${starred.data.length}</h5>
+                                <h5 class="card-title">2</h5>
                             </div>
                         </div>
 
                         <div class="card mb-3">
                             <div class="card-header">Following:</div>
                             <div class="card-body">
-                                <h5 class="card-title">${answer.data.following}</h5>
+                                <h5 class="card-title">3</h5>
                             </div>
                         </div>
                     </div>
@@ -231,5 +152,4 @@ const generateHTML = (answer, starred, userColorChoice) => {
         </main>
         
     </body>
-    </html>`;
-}
+    </html>
