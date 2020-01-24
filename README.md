@@ -24,13 +24,7 @@ The PDF will be populated with the following:
 
 Following the [common templates for user stories](https://en.wikipedia.org/wiki/User_story#Common_templates), we can frame this challenge as follows:
 
-```
-AS A product manager
-
-I WANT a developer profile generator
-
-SO THAT I can easily prepare reports for stakeholders
-```
+!(dev-profile-generator-demo.gif)
 
 Refer to the [design mockup](./Assets/09-NodeJS-homework-demo.pdf).
 
