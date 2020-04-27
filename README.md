@@ -22,6 +22,8 @@ Given the user has a GitHub profile - the user will be prompted for the develope
 * Number of GitHub stars
 * Number of users following
 
+[Deployed Link](https://joelynn94.github.io/dev-profile-generator/)
+
 ### App Demo
 
 ![App Gif Demo](dev-profile-generator-demo.gif)
