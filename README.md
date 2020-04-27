@@ -24,11 +24,12 @@ Given the user has a GitHub profile - the user will be prompted for the develope
 
 ### App Demo
 
+![App Gif Demo](dev-profile-generator-demo.gif)
 
 #### Technologies Used 
- - NodeJS
- - JavaScript
- - Github API
- - HTML
- - CSS
+ * NodeJS
+ * JavaScript
+ * Github API
+ * HTML
+ * CSS
 
