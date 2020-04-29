@@ -1,10 +1,8 @@
 # Developer Profile Generator
 
-Create a command-line application that dynamically generates a PDF profile from a GitHub username. The application will be invoked with the following command:
-
 ### Purpose 
 
-It is important to have up-to-date information about members of the development team. Rather than navigating to each team member's GitHub profile, a command-line application will allow for quick and easy generation of profiles in PDF format.
+A command-line application that dynamically generates a PDF profile from a GitHub username. It is important to have up-to-date information about members of the development team. Rather than navigating to each team member's GitHub profile, a command-line application will allow for quick and easy generation of profiles in PDF format.
 
 ### Functionality
 
@@ -28,7 +26,7 @@ Given the user has a GitHub profile - the user will be prompted for the develope
 
 ![App Gif Demo](dev-profile-generator-demo.gif)
 
-#### Technologies Used 
+### Technologies Used 
  * NodeJS
  * JavaScript
  * Github API
